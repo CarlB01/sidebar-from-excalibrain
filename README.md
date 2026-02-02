@@ -1,14 +1,13 @@
-# a declaration.
 This a side project and also a _sidebar_ project.
 More like paying a hommage to the original project.
 I´d like to fill the _waiting time_ by shuffling around code within the excalibrain to see what happens. 
 Mainly, perhaps try to squeeze the tree view into a side bar and in that regard "clean up" the display for this particular use scenario.
 With my meager coding knowledge I should be able to do that, without disrupting the functionality.
 
-As [@zsviczian](https://twitter.com/zsviczian) himself stated in this [twitter/x post](https://x.com/zsviczian/status/1834485660566052940?s=20) in september 2024, ExcaliBrain is by him regarded as a "stop-gap solution", by that i suppose he means that the use of [obsidian dataview](https://github.com/blacksmithgu/obsidian-dataview) and [obsidian excalidraw](https://excalidraw-obsidian.online/Welcome) within obsidian itself shouldn't be regarded as the final solution. 
+# more reading
+As [@zsviczian](https://twitter.com/zsviczian) said in this [twitter/x post](https://x.com/zsviczian/status/1834485660566052940?s=20) in september 2024, ExcaliBrain might be regarded as a "stop-gap solution", by that i suppose he means that the use of [obsidian dataview](https://github.com/blacksmithgu/obsidian-dataview) and [obsidian excalidraw](https://excalidraw-obsidian.online/Welcome) within obsidian itself shouldn't be regarded as the final solution. 
 
-So there the development goes into _maintenance_. Neither of the implied parties has the time to develop the idea. (Yet). 
-At least not until the base app is stable enough.
+Currently the project is tended in _maintenance mode_.
 
 But what a beauty excalibrain is. And even then, as Zsolt points out in his tweet, "it does not even come close to the beauty and elegance of [TheBrain's graph](https://www.thebrain.com)" where the idea of the visual node display seems to have originated. 
 

@@ -125,6 +125,8 @@ export type Neighbour = {
 }
 
 export type LayoutSpecification = {
+  sortByType: boolean;
+  layoutVertically: boolean;
   columns: number;
   origoX: number;
   origoY: number;

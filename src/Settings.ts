@@ -395,21 +395,8 @@ export class ExcaliBrainSettingTab extends PluginSettingTab {
       if(this.updateTimer) {
         this.plugin.scene.setTimer();
       }
-      this.reloadCss();
+      this.plugin.scene.reloadCss();
       this.plugin.scene.reRender();
-    }
-  }
-
-  // Source - https://stackoverflow.com/a/43161591
-  // Posted by Dan Bray
-  // Retrieved 2026-02-02, License - CC BY-SA 3.0
-
-  async reloadCss(){
-    var links = document.getElementsByTagName("link");
-    for (var cl in links){
-      var link = links[cl];
-      if (link.rel === "stylesheet")
-          link.href += "";
     }
   }
 

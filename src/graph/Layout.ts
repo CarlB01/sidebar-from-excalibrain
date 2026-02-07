@@ -41,18 +41,27 @@ export class Layout {
         ? generateOddLayoutVector([(columns-items)/2,items,(columns-items)/2]) //odd
         : generateOddLayoutVector([(columns-items)/2,items/2,1,items/2,(columns-items)/2])); //even
     
-    const sortedNodes = this.nodes.sort((a,b) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1)
+    //CB added 3 lines
+    const sortedNodes = this.spec.sortByType
+      ? this.nodes.sort((a,b) => (a.page.primaryStyleTag ?? "").localeCompare((b.page.primaryStyleTag ?? "")))
+      : this.nodes.sort((a,b) => a.title.toLowerCase() < b.title.toLowerCase() ? -1 : 1);
+    
+    
     const itemCount = sortedNodes.length;
     if(itemCount === 0) {
       return;
     }
     const rowCount = Math.ceil(itemCount / columns);
 
-    this.renderedNodes = Array<Node>(rowCount).fill(null).map((_,i) =>
-      (i+1 < rowCount) || (itemCount % columns === 0)
-        ? Array(columns).fill(null).map((_,j) => sortedNodes[i*columns+j]) //full row
-        : getRowLayout(itemCount % columns).map(idx => idx ? sortedNodes[i*columns+idx-1]:null));
-  }
+    //CB modified 7 lines
+    this.renderedNodes = this.spec.layoutVertically
+      ? Array<Node>(rowCount).fill(null).map((_,i) => 
+          Array(columns).fill(null).map((_,j) => sortedNodes[j*rowCount+i]))
+      : Array<Node>(rowCount).fill(null).map((_,i) =>
+          (i+1 < rowCount) || (itemCount % columns === 0)
+            ? Array(columns).fill(null).map((_,j) => sortedNodes[i*columns+j]) //full row
+            : getRowLayout(itemCount % columns).map(idx => idx ? sortedNodes[i*columns+idx-1]:null));
+  } 
 
   async render() {
     this.layout();

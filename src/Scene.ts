@@ -88,6 +88,22 @@ export class Scene {
     return !this.terminated && this.app.workspace.getLeafById(this.leaf?.id)
   }
 
+  /* //CB
+   * updates the CSS after compactView is toggled.
+   * Affects Toolbar visibility and history bar visibility 
+      // Source - https://stackoverflow.com/a/43161591
+      // Posted by Dan Bray
+      // Retrieved 2026-02-02, License - CC BY-SA 3.0
+  */
+  async reloadCss(){
+    var links = document.getElementsByTagName("link");
+    for (var cl in links){
+      var link = links[cl];
+      if (link.rel === "stylesheet")
+          link.href += "";
+    }
+  }
+
   /**
    * Updates the current Scene applying changes in the Index
    * @returns 
@@ -420,7 +436,7 @@ export class Scene {
         (x.page.path !== centralPage.path) &&
         !settings.excludeFilepaths.some(p => x.page.path.startsWith(p)) &&
         (!x.page.primaryStyleTag || !this.toolsPanel.linkTagFilter.selectedTags.has(x.page.primaryStyleTag)))
-      .slice(0,settings.maxItemCount);
+      .slice(0,settings.maxItemCount).sort((a, b) => Number(a.page.primaryStyleTag) - Number(b.page.primaryStyleTag));
     
     const leftFriends = centralPage.getLeftFriends().concat(centralPage.getPreviousFriends())
       .filter(x => 
@@ -779,6 +795,8 @@ export class Scene {
  
     // layout    
     const lCenter = new Layout({
+      sortByType: settings.compactView,
+      layoutVertically: settings.compactView,
       origoX: 0,
       origoY: isCenterEmbedded
         ? centerEmbedHeight/2 // -this.nodeHeight/2 (would move friends exactly in alignment with the center)
@@ -797,6 +815,8 @@ export class Scene {
     this.layouts.push(lCenter);
 
     const lChildren = new Layout({
+      sortByType: settings.compactView,
+      layoutVertically: settings.compactView,
       origoX: 0,
       origoY: childrenOrigoY,
       top: 0,
@@ -809,6 +829,8 @@ export class Scene {
     this.layouts.push(lChildren);
     
     const lFriends = new Layout({
+      sortByType: settings.compactView,
+      layoutVertically: settings.compactView,
       origoX: -leftFriendOrigoX,
       origoY: 0,
       top: null,
@@ -821,6 +843,8 @@ export class Scene {
     this.layouts.push(lFriends);
 
     const lNextFriends = new Layout({
+      sortByType: settings.compactView,
+      layoutVertically: settings.compactView,
       origoX: rightFriendOrigoX,
       origoY: 0,
       top: null,
@@ -833,6 +857,8 @@ export class Scene {
     this.layouts.push(lNextFriends);
     
     const lParents = new Layout({
+      sortByType: settings.compactView,
+      layoutVertically: settings.compactView,
       origoX:0,
       origoY: - parentsOrigoY,
       top: null,
@@ -845,6 +871,8 @@ export class Scene {
     this.layouts.push(lParents);
 
     const lSiblings = new Layout({
+      sortByType: settings.compactView,
+      layoutVertically: settings.compactView,
       //origoX: this.nodeWidth * ((parentCols-1)/2 + (siblingsCols+1.5)/3), //orig
       origoX: siblingsOrigoX,
       origoY: - siblingsOrigoY,
